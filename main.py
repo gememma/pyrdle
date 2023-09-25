@@ -52,6 +52,10 @@ def score_guess(guess, answer):
             if letter in seen:
                 scored += incorrect(letter)
                 emojied.append(emojis['incorrect'])
+            elif letter in guess[i + 1:]:
+                scored += incorrect(letter)
+                emojied.append(emojis['incorrect'])
+                seen += letter
             else:
                 scored += correct_letter(letter)
             emojied.append(emojis['correct_letter'])
@@ -63,7 +67,7 @@ def score_guess(guess, answer):
     return ''.join(scored), ''.join(emojied)
 
 
-WELCOME_MESSAGE = correct_place("WELCOME") + " " + incorrect("TO") + " " + correct_letter("TWORDLE") + "\n"
+WELCOME_MESSAGE = correct_place("WELCOME") + " " + incorrect("TO") + " " + correct_letter("PYRDLE") + "\n"
 
 
 def main():
@@ -73,7 +77,8 @@ def main():
     used_guesses = 0
     console = Console()
 
-    answer_word = get_random_line("word_list.txt").upper().strip()
+    # answer_word = get_random_line("word_list.txt").upper().strip()
+    answer_word = "COEDS"
 
     all_emojied = []
     all_scored = []
